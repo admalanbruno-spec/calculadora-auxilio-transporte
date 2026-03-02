@@ -47,6 +47,7 @@
 <input type="number" id="diasEfetivos">
 
 <button onclick="calcular()">Calcular</button>
+<button onclick="novaConsulta()">Nova Consulta</button>
 
 <div class="resultado" id="resultado"></div>
 
@@ -79,6 +80,13 @@ function calcular() {
         "Valor proporcional devido: R$ " + Vp.toFixed(2) + "<br>" +
         "<strong>Valor a descontar em folha: R$ " + Desconto.toFixed(2) + "</strong>";
 }
+function novaConsulta() {
+document.getElementById("valorRecebido").value = "";
+document.getElementById("diasSolicitados").value = "";
+document.getElementById("diasEfetivos").value = "";
+document.getElementById("resultado").innerHTML = "";
+}
+    
 </script>
 
 </body>
