@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora - Desconto de Auxílio Transporte</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            font-weight: bold;
+        }
+        .resultado {
+            margin-top: 20px;
+            background-color: #f4f4f4;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Calculadora de Desconto - Auxílio Transporte</h2>
+
+<label>Valor recebido no mês anterior (R$):</label>
+<input type="number" id="valorRecebido" step="0.01">
+
+<label>Dias solicitados em requerimento:</label>
+<input type="number" id="diasSolicitados">
+
+<label>Dias de efetivo deslocamento:</label>
+<input type="number" id="diasEfetivos">
+
+<button onclick="calcular()">Calcular</button>
+
+<div class="resultado" id="resultado"></div>
+
+<script>
+function calcular() {
+
+    let V = parseFloat(document.getElementById("valorRecebido").value);
+    let Ds = parseInt(document.getElementById("diasSolicitados").value);
+    let De = parseInt(document.getElementById("diasEfetivos").value);
+
+    if (isNaN(V) || isNaN(Ds) || isNaN(De)) {
+        document.getElementById("resultado").innerHTML = "Preencha todos os campos corretamente.";
+        return;
+    }
+
+    if (De > Ds) {
+        document.getElementById("resultado").innerHTML = "Os dias de efetivo deslocamento não podem ser maiores que os dias solicitados.";
+        return;
+    }
+
+    let Dn = Ds - De;                 // Dias sem deslocamento
+    let Vd = V / Ds;                  // Valor diário
+    let Vp = Vd * De;                 // Valor proporcional devido
+    let Desconto = V - Vp;            // Valor a descontar
+
+    document.getElementById("resultado").innerHTML =
+        "<strong>Resultados:</strong><br><br>" +
+        "Dias sem deslocamento: " + Dn + "<br>" +
+        "Valor diário do auxílio: R$ " + Vd.toFixed(2) + "<br>" +
+        "Valor proporcional devido: R$ " + Vp.toFixed(2) + "<br>" +
+        "<strong>Valor a descontar em folha: R$ " + Desconto.toFixed(2) + "</strong>";
+}
+</script>
+
+</body>
+</html>
