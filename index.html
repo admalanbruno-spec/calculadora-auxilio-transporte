@@ -30,6 +30,12 @@
     padding: 15px;
     border: 1px solid #444;
 }
+        .valor-destaque {
+    font-size: 26px;
+    font-weight: bold;
+        color: #00ff88;
+    margin-top: 10px;
+}
 .botoes {
     display: flex;
     gap: 10px;
@@ -46,7 +52,7 @@
 <h2>Calculadora de Desconto - Auxílio Transporte</h2>
 
 <label>Valor recebido no mês anterior (R$):</label>
-<input type="number" id="valorRecebido" step="0.01">
+<input type="text" id="valorRecebido" oninput="formatarMoeda(this)">
 
 <label>Dias solicitados em requerimento:</label>
 <input type="number" id="diasSolicitados">
@@ -64,7 +70,8 @@
 <script>
 function calcular() {
 
-    let V = parseFloat(document.getElementById("valorRecebido").value);
+    let valorTexto = document.getElementById("valorRecebido").value;
+    let V = parseFloat(valorTexto.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
     let Ds = parseInt(document.getElementById("diasSolicitados").value);
     let De = parseInt(document.getElementById("diasEfetivos").value);
 
@@ -88,13 +95,23 @@ function calcular() {
         "Dias sem deslocamento: " + Dn + "<br>" +
         "Valor diário do auxílio: R$ " + Vd.toFixed(2) + "<br>" +
         "Valor proporcional devido: R$ " + Vp.toFixed(2) + "<br>" +
-        "<strong>Valor a descontar em folha: R$ " + Desconto.toFixed(2) + "</strong>";
+        "<div class='valor-destaque'>Valor a descontar em folha: R$ " + Desconto.toFixed(2) + "</div>";
 }
 function novaConsulta() {
 document.getElementById("valorRecebido").value = "";
 document.getElementById("diasSolicitados").value = "";
 document.getElementById("diasEfetivos").value = "";
 document.getElementById("resultado").innerHTML = "";
+}
+function formatarMoeda(campo) {
+let valor = campo.value.replace(/\D/g, "");
+
+valor = (valor / 100).toFixed(2) + "";
+valor = valor.replace(".", ",");
+
+valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+campo.value = "R$ " + valor;
 }
     
 </script>
