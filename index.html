@@ -84,13 +84,13 @@ O auxílio-transporte é pago de forma antecipada. Informe o valor recebido no m
 </small>
     
 <label>Dias solicitados em requerimento:</label>
-<input type="number" id="diasSolicitados">
+<input type="text" id="diasSolicitados" oninput="formatarDias(this)">
 <small class="legenda">
 Informe a quantidade de dias de deslocamento solicitados no requerimento de auxílio-transporte apresentado à CGP.
 </small>
 
 <label>Dias de efetivo deslocamento:</label>
-<input type="number" id="diasEfetivos">
+<input type="text" id="diasEfetivos" oninput="formatarDias(this)">
 <small class="legenda">
 Informe a quantidade de dias em que houve comparecimento presencial ao campus no mês de referência.
 </small>
