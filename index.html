@@ -103,12 +103,19 @@ Informe a quantidade de dias em que houve comparecimento presencial ao campus no
 <div class="resultado" id="resultado"></div>
 
 <script>
+    function formatarDias(campo) {
+    let valor = campo.value.replace(/\D/g, ""); // remove tudo que não for número
+    
+    if (valor === "") {
+        campo.value = "";
+        return;
+    }
 function calcular() {
 
     let valorTexto = document.getElementById("valorRecebido").value;
     let V = parseFloat(valorTexto.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
-    let Ds = parseInt(document.getElementById("diasSolicitados").value);
-    let De = parseInt(document.getElementById("diasEfetivos").value);
+    let Ds = parseInt(document.getElementById("diasSolicitados").value.replace(/\D/g, ""));
+    let De = parseInt(document.getElementById("diasEfetivos").value.replace(/\D/g, ""));
 
     if (isNaN(V) || isNaN(Ds) || isNaN(De)) {
         document.getElementById("resultado").innerHTML = "Preencha todos os campos corretamente.";
